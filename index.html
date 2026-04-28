@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Decent School Kota – Shreshtha Shiksha ka Kendra</title>
+
+  <!-- Vapi Web SDK -->
+  <script>
+    (function(d, t) {
+      var g = document.createElement(t), s = d.getElementsByTagName(t)[0];
+      g.src = "https://cdn.jsdelivr.net/gh/VapiAI/html-script-tag@latest/dist/assets/index.js";
+      g.defer = true;
+      g.async = true;
+      s.parentNode.insertBefore(g, s);
+      g.onload = function() {
+        window.vapiInstance = window.vapiSDK.run({
+          apiKey: "599ccee0-fc7e-4b05-b3fc-eb49291e97f4", // shareKey
+          assistant: "9b4b3ad7-fb3f-4789-ae18-ed62ecc38145", // assistantId
+          config: {
+            position: "bottom-right",
+            offset: "40px",
+            width: "60px",
+            height: "60px",
+            idle: {
+              color: "#c8960c",
+              type: "round",
+              icon: "https://unpkg.com/lucide-static@latest/icons/mic.svg",
+              title: "School Assistant",
+              subtitle: "Baat karne ke liye click karein",
+            },
+            active: {
+              color: "#e63946",
+              type: "round",
+              icon: "https://unpkg.com/lucide-static@latest/icons/phone-off.svg",
+              title: "Baat ho rahi hai...",
+              subtitle: "Band karne ke liye click karein",
+            },
+          },
+        });
+
+        // Auto-start the call after 1.5 seconds
+        setTimeout(function() {
+          if (window.vapiInstance) {
+            window.vapiInstance.start();
+            document.getElementById('ai-banner').style.display = 'flex';
+          }
+        }, 1500);
+      };
+    })(document, "script");
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Mukta:wght@400;600;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root {
+      --gold:   #c8960c;
+      --gold-lt:#f0c040;
+      --navy:   #0b1e3d;
+      --navy2:  #112244;
+      --cream:  #fdf6e3;
+      --red:    #c0392b;
+      --white:  #ffffff;
+      --shadow: 0 8px 40px rgba(0,0,0,0.18);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Mukta', sans-serif;
+      background: var(--cream);
+      color: var(--navy);
+      overflow-x: hidden;
+    }
+
+    /* ───── AI BANNER ───── */
+    #ai-banner {
+      display: none;
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 9999;
+      background: linear-gradient(90deg, var(--navy) 0%, var(--navy2) 100%);
+      color: var(--gold-lt);
+      font-size: 0.92rem;
+      padding: 10px 20px;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      animation: slideDown .5s ease;
+    }
+    @keyframes slideDown { from { transform: translateY(-100%); } to { transform: translateY(0); } }
+    #ai-banner .dot {
+      width: 10px; height: 10px;
+      background: #2ecc71;
+      border-radius: 50%;
+      animation: pulse 1.2s infinite;
+    }
+    @keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:.5; transform:scale(1.4); } }
+
+    /* ───── NAVBAR ───── */
+    nav {
+      background: var(--navy);
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      height: 68px;
+      box-shadow: 0 2px 16px rgba(0,0,0,.35);
+    }
+    .logo {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .logo-emblem {
+      width: 46px; height: 46px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: grid; place-items: center;
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 1.3rem;
+      color: var(--navy);
+    }
+    .logo-text {
+      color: var(--white);
+      font-size: 1.1rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .logo-text span {
+      display: block;
+      color: var(--gold-lt);
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a {
+      color: rgba(255,255,255,.8);
+      text-decoration: none;
+      font-size: .9rem;
+      font-weight: 600;
+      letter-spacing: .5px;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--gold-lt); }
+
+    /* ───── HERO ───── */
+    .hero {
+      min-height: 92vh;
+      background:
+        linear-gradient(160deg, rgba(11,30,61,.92) 0%, rgba(17,34,68,.78) 60%, transparent 100%),
+        url('https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1600&q=80') center/cover no-repeat;
+      display: flex; flex-direction: column;
+      justify-content: center;
+      padding: 0 8%;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 80px;
+      background: linear-gradient(to top, var(--cream), transparent);
+    }
+    .hero-badge {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--navy);
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 2px;
+      margin-bottom: 24px;
+      width: fit-content;
+      animation: fadeUp .6s ease both;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.15;
+      max-width: 680px;
+      animation: fadeUp .7s .1s ease both;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--gold-lt);
+    }
+    .hero p {
+      margin: 20px 0 36px;
+      color: rgba(255,255,255,.82);
+      font-size: 1.1rem;
+      max-width: 540px;
+      line-height: 1.7;
+      animation: fadeUp .7s .2s ease both;
+    }
+    .hero-cta {
+      display: flex; gap: 16px; flex-wrap: wrap;
+      animation: fadeUp .7s .3s ease both;
+    }
+    .btn {
+      padding: 14px 32px;
+      font-family: 'Mukta', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      border: none; cursor: pointer;
+      border-radius: 4px;
+      transition: transform .2s, box-shadow .2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+    .btn-primary { background: var(--gold); color: var(--navy); }
+    .btn-outline { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,.6); }
+    .btn-outline:hover { border-color: var(--gold-lt); color: var(--gold-lt); }
+
+    /* ───── AI CALL BOX (inline) ───── */
+    .ai-call-box {
+      position: absolute; right: 8%; top: 50%; transform: translateY(-50%);
+      background: rgba(11,30,61,.85);
+      border: 1px solid rgba(200,150,12,.4);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      padding: 28px 32px;
+      width: 260px;
+      text-align: center;
+      color: var(--white);
+      animation: fadeUp .8s .4s ease both;
+    }
+    .ai-call-box .mic-ring {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: var(--gold);
+      display: grid; place-items: center;
+      margin: 0 auto 16px;
+      position: relative;
+    }
+    .mic-ring::before {
+      content:'';
+      position:absolute; inset:-6px;
+      border-radius:50%;
+      border: 2px solid rgba(200,150,12,.4);
+      animation: ripple 1.8s infinite;
+    }
+    @keyframes ripple { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0;transform:scale(1.35)} }
+    .mic-ring svg { width:32px; height:32px; fill:var(--navy); }
+    .ai-call-box h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+    .ai-call-box p { font-size: .82rem; color: rgba(255,255,255,.7); line-height: 1.5; }
+    .ai-call-box .live-tag {
+      margin-top: 14px;
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(46,204,113,.15);
+      color: #2ecc71;
+      font-size: .78rem; font-weight: 700;
+      padding: 4px 12px; border-radius: 20px;
+    }
+
+    @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+
+    /* ───── STATS ───── */
+    .stats {
+      background: var(--navy);
+      display: flex; justify-content: center; flex-wrap: wrap;
+      gap: 0;
+    }
+    .stat {
+      flex: 1; min-width: 160px;
+      padding: 32px 24px;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,.08);
+    }
+    .stat:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--gold-lt);
+    }
+    .stat-lbl { color: rgba(255,255,255,.6); font-size: .82rem; margin-top: 4px; }
+
+    /* ───── SECTION COMMON ───── */
+    section { padding: 80px 8%; }
+    .section-tag {
+      display: inline-block;
+      color: var(--gold);
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 900;
+      color: var(--navy);
+      margin-bottom: 14px;
+    }
+    .sub { color: #555; font-size: 1.05rem; line-height: 1.7; max-width: 600px; margin-bottom: 48px; }
+
+    /* ───── FEATURES ───── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 28px;
+    }
+    .feature-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 32px 28px;
+      box-shadow: 0 4px 24px rgba(0,0,0,.07);
+      border-top: 4px solid var(--gold);
+      transition: transform .25s;
+    }
+    .feature-card:hover { transform: translateY(-6px); }
+    .feat-icon {
+      font-size: 2rem;
+      margin-bottom: 14px;
+    }
+    .feature-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+    .feature-card p { font-size: .88rem; color: #555; line-height: 1.6; }
+
+    /* ───── ABOUT ───── */
+    .about {
+      background: var(--navy);
+      display: flex; align-items: center; gap: 60px; flex-wrap: wrap;
+    }
+    .about-img {
+      flex: 1; min-width: 280px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .about-img img { width: 100%; display: block; }
+    .about-text { flex: 1; min-width: 280px; }
+    .about .section-tag { color: var(--gold-lt); }
+    .about h2 { color: var(--white); }
+    .about .sub { color: rgba(255,255,255,.7); margin-bottom: 28px; }
+    .about .btn-primary { margin-top: 8px; }
+
+    /* ───── GALLERY ───── */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto auto;
+      gap: 14px;
+    }
+    .gallery-grid img {
+      width: 100%; height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+      transition: transform .3s;
+    }
+    .gallery-grid img:hover { transform: scale(1.03); }
+    .gallery-grid img:first-child {
+      grid-column: span 2;
+      height: 260px;
+    }
+
+    /* ───── CONTACT ───── */
+    .contact-wrap {
+      display: flex; gap: 48px; flex-wrap: wrap; align-items: flex-start;
+    }
+    .contact-info { flex: 1; min-width: 240px; }
+    .contact-info h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 16px; }
+    .contact-row { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+    .contact-row .icon { font-size: 1.3rem; margin-top: 2px; }
+    .contact-row p { font-size: .9rem; color: #444; line-height: 1.5; }
+    .ai-cta-box {
+      flex: 1; min-width: 260px;
+      background: var(--navy);
+      border-radius: 12px;
+      padding: 36px 32px;
+      text-align: center;
+      color: var(--white);
+    }
+    .ai-cta-box h3 { font-size: 1.2rem; margin-bottom: 10px; color: var(--gold-lt); }
+    .ai-cta-box p { font-size: .9rem; color: rgba(255,255,255,.7); margin-bottom: 24px; line-height: 1.6; }
+    .ai-cta-box .btn { width: 100%; text-align: center; }
+
+    /* ───── FOOTER ───── */
+    footer {
+      background: #060f1e;
+      color: rgba(255,255,255,.45);
+      text-align: center;
+      font-size: .82rem;
+      padding: 24px 5%;
+    }
+    footer strong { color: var(--gold-lt); }
+
+    /* ───── RESPONSIVE ───── */
+    @media (max-width: 860px) {
+      .ai-call-box { display: none; }
+      .hero { min-height: 75vh; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-grid img:first-child { grid-column: 1; height: 200px; }
+      .nav-links { gap: 14px; }
+    }
+    @media (max-width: 560px) {
+      .nav-links { display: none; }
+      .gallery-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- AI ACTIVE BANNER -->
+  <div id="ai-banner">
+    <div class="dot"></div>
+    🎙️ School AI Assistant ab active hai — neeche right corner mein baat karein!
+  </div>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="logo">
+      <div class="logo-emblem">DS</div>
+      <div class="logo-text">
+        Decent School
+        <span>Kota, Rajasthan</span>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="#features">Suvidhaen</a>
+      <a href="#about">Hamare Baare Mein</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Sampark</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">🏫 Kota ka Gaurav — Since 2005</div>
+    <h1>Jahan <em>Sapne</em> Haqeeqat<br/>Bante Hain</h1>
+    <p>Decent School Kota mein aapke bachche ka bhavishya ujjwal hoga — shreshtha shiksha, anushashit vatavaran aur prerna dayak shikshak ke saath.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-primary">Admission Jaankari</a>
+      <a href="#about" class="btn btn-outline">Aur Jaanein</a>
+    </div>
+
+    <!-- Floating AI Box -->
+    <div class="ai-call-box">
+      <div class="mic-ring">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+          <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8"/>
+        </svg>
+      </div>
+      <h3>AI School Assistant</h3>
+      <p>Admission, fees ya kisi bhi sawal ke liye abhi baat karein</p>
+      <div class="live-tag">
+        <span style="width:8px;height:8px;background:#2ecc71;border-radius:50%;display:inline-block;"></span>
+        LIVE
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat"><div class="stat-num">1200+</div><div class="stat-lbl">Vidyarthi</div></div>
+    <div class="stat"><div class="stat-num">95%</div><div class="stat-lbl">Board Result</div></div>
+    <div class="stat"><div class="stat-num">60+</div><div class="stat-lbl">Anubhavi Shikshak</div></div>
+    <div class="stat"><div class="stat-num">20+</div><div class="stat-lbl">Varsh ka Anubhav</div></div>
+  </div>
+
+  <!-- FEATURES -->
+  <section id="features">
+    <div class="section-tag">Hamari Visheshataen</div>
+    <h2>Kyun Chunein Decent School?</h2>
+    <p class="sub">Hum sirf padhaai nahi, sampoorn vyaktitva ka vikas karte hain — khel, kala, vigyan aur naitik mulyon ke saath.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feat-icon">📚</div>
+        <h3>CBSE Curriculum</h3>
+        <p>Class 1 se 12 tak CBSE pattakrama ke anusaar ucch-stariya shiksha, experienced faculty ke saath.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feat-icon">🔬</div>
+        <h3>Smart Labs</h3>
+        <p>Vigyan, ganit aur computer labs se practical seekhne ka mauka milta hai.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feat-icon">🏆</div>
+        <h3>Sports & Activities</h3>
+        <p>Cricket, kabaddi, badminton ke alawa cultural events mein bhi school aage rehta hai.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feat-icon">🤖</div>
+        <h3>AI-Powered Support</h3>
+        <p>24/7 AI school assistant se tatkaal jawab paayein — admission, time-table, fees sab kuch.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feat-icon">🚌</div>
+        <h3>Safe Transport</h3>
+        <p>GPS-enabled school buses Kota ke sabhi major areas mein available hain.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feat-icon">👨‍👩‍👧</div>
+        <h3>Parent Connect</h3>
+        <p>Regular PTM aur app ke through parents ko bachche ki progress ki poori jaankari.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="about">
+    <div class="about-img">
+      <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=700&q=80" alt="School Building"/>
+    </div>
+    <div class="about-text">
+      <div class="section-tag">Hamare Baare Mein</div>
+      <h2>Kota ki Shaan,<br/>Bachchon ka Abhimaan</h2>
+      <p class="sub">2005 mein sthaapit, Decent School Kota aaj Rajasthan ke shreshtha schools mein gina jaata hai. Hamara mission hai – har bachche ki chhipi hui pratibha ko nikhaarna aur use ek zimmedaar nagarik banana.</p>
+      <p class="sub">Hamare shikshak sirf paath-pustak nahi padhate, balki jeevan ki seekh bhi dete hain. Hamara campus 5 acre mein failaa hua hai, jis mein library, auditorium, aur indoor stadium bhi hai.</p>
+      <a href="#contact" class="btn btn-primary">Admission 2025–26 Khuli Hai</a>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery">
+    <div class="section-tag">Jhalkiyan</div>
+    <h2>School Ki Duniya</h2>
+    <p class="sub">Hamari activities aur campus ki kuch khubsoorat yaadein.</p>
+    <div class="gallery-grid">
+      <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?w=800&q=80" alt="Students"/>
+      <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?w=400&q=80" alt="Classroom"/>
+      <img src="https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=400&q=80" alt="Lab"/>
+      <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&q=80" alt="Sports"/>
+      <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=400&q=80" alt="Campus"/>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-tag">Sampark Karein</div>
+    <h2>Hamse Milein</h2>
+    <p class="sub">Admission ya kisi bhi jaankari ke liye hamse seedha sampark karein — ya neeche AI assistant se baat karein!</p>
+    <div class="contact-wrap">
+      <div class="contact-info">
+        <h3>School Ka Pata</h3>
+        <div class="contact-row">
+          <div class="icon">📍</div>
+          <p>Decent School, Near Station Road,<br/>Kota, Rajasthan – 324001</p>
+        </div>
+        <div class="contact-row">
+          <div class="icon">📞</div>
+          <p>+91 98765 43210</p>
+        </div>
+        <div class="contact-row">
+          <div class="icon">✉️</div>
+          <p>info@decentschoolkota.in</p>
+        </div>
+        <div class="contact-row">
+          <div class="icon">🕘</div>
+          <p>Somvaar – Shanivaar<br/>8:00 AM – 4:00 PM</p>
+        </div>
+      </div>
+
+      <div class="ai-cta-box">
+        <h3>🎙️ AI Assistant Se Baat Karein</h3>
+        <p>Admission fees, documents, time-table ya kuch bhi poochhna ho — hamara AI assistant 24/7 available hai aur Hindi mein jawaab deta hai.</p>
+        <button class="btn btn-primary" onclick="if(window.vapiInstance) window.vapiInstance.start();">
+          🎙️ Abhi Baat Karein
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 <strong>Decent School Kota</strong>. Sarvaadhikar Surakshit. | AI Assistant powered by <strong>Vapi.ai</strong></p>
+  </footer>
+
+</body>
+</html>
